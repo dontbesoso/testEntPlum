@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Adam_AsprovaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Adam_Asprova.dbo.itZestawieniaPlum' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="itZestawieniaPlum">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userid" Type="nvarchar(max)" />
+          <Property Name="userName" Type="nvarchar(max)" />
+          <Property Name="machineName" Type="nvarchar(max)" />
+          <Property Name="timeIn" Type="nvarchar(max)" />
+          <Property Name="timeOut" Type="nvarchar(max)" />
+          <Property Name="ileGodzin" Type="int" />
+          <Property Name="ileMinut" Type="int" />
+          <Property Name="bilans" Type="int" />
+        </EntityType>
+        <Function Name="it_ZasilPlumDzien" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="czas" Type="datetime" Mode="In" />
+        </Function>
+        <EntityContainer Name="Adam_AsprovaModelStoreContainer">
+          <EntitySet Name="itZestawieniaPlum" EntityType="Self.itZestawieniaPlum" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [itZestawieniaPlum].[id] AS [id], 
+    [itZestawieniaPlum].[userid] AS [userid], 
+    [itZestawieniaPlum].[userName] AS [userName], 
+    [itZestawieniaPlum].[machineName] AS [machineName], 
+    [itZestawieniaPlum].[timeIn] AS [timeIn], 
+    [itZestawieniaPlum].[timeOut] AS [timeOut], 
+    [itZestawieniaPlum].[ileGodzin] AS [ileGodzin], 
+    [itZestawieniaPlum].[ileMinut] AS [ileMinut], 
+    [itZestawieniaPlum].[bilans] AS [bilans]
+    FROM [dbo].[itZestawieniaPlum] AS [itZestawieniaPlum]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Adam_AsprovaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="itZestawieniaPlum">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userid" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="userName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="machineName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="timeIn" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="timeOut" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ileGodzin" Type="Int32" />
+          <Property Name="ileMinut" Type="Int32" />
+          <Property Name="bilans" Type="Int32" />
+        </EntityType>
+        <EntityContainer Name="Adam_AsprovaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="itZestawieniaPlums" EntityType="Self.itZestawieniaPlum" />
+          <FunctionImport Name="it_ZasilPlumDzien">
+            <Parameter Name="czas" Mode="In" Type="DateTime" />
+          </FunctionImport>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Adam_AsprovaModelStoreContainer" CdmEntityContainer="Adam_AsprovaEntities">
+          <EntitySetMapping Name="itZestawieniaPlums">
+            <EntityTypeMapping TypeName="Adam_AsprovaModel.itZestawieniaPlum">
+              <MappingFragment StoreEntitySet="itZestawieniaPlum">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="userid" ColumnName="userid" />
+                <ScalarProperty Name="userName" ColumnName="userName" />
+                <ScalarProperty Name="machineName" ColumnName="machineName" />
+                <ScalarProperty Name="timeIn" ColumnName="timeIn" />
+                <ScalarProperty Name="timeOut" ColumnName="timeOut" />
+                <ScalarProperty Name="ileGodzin" ColumnName="ileGodzin" />
+                <ScalarProperty Name="ileMinut" ColumnName="ileMinut" />
+                <ScalarProperty Name="bilans" ColumnName="bilans" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="it_ZasilPlumDzien" FunctionName="Adam_AsprovaModel.Store.it_ZasilPlumDzien" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

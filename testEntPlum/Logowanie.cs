@@ -26,14 +26,24 @@ namespace testEntPlum
         {
             string password, username;
 
-            password = txtLogin.Text.ToString().ToUpper();
-            username = txtPass.Text.ToString().ToUpper();
+            string sysUser = "ADAM";
+            string sysPass = "TEST";
 
-            if ((string.Compare(username, "ADAM") == 0) && (string.Compare(password, "TEST") == 0))
-                MessageBox.Show(password + " " + username);
+            username = txtLogin.Text.ToString().ToUpper().Trim();
+            password = txtPass.Text.ToString().ToUpper().Trim();
+
+
+            if ((username == sysUser.ToUpper().Trim()) && (password == sysPass.ToUpper().Trim()))
+            {
+                MessageBox.Show("Sukces");
+                mainList listaLogowan = new mainList();
+                listaLogowan.Show();
+                txtLogin.Text = "";
+                txtPass.Text = "";
+            }
             else
             {
-                MessageBox.Show(password + " " + username);
+                MessageBox.Show("Nieprawidłowy login lub hasło.");
                 txtLogin.Text = "";
                 txtPass.Text = "";
             }

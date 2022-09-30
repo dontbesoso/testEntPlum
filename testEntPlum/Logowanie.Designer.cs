@@ -93,6 +93,8 @@ namespace testEntPlum
             this.Controls.Add(this.txtPass);
             this.Controls.Add(this.txtLogin);
             this.Cursor = System.Windows.Forms.Cursors.Default;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "Logowanie";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Logowanie";
