@@ -4,8 +4,11 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="478beeeabcae4584a3c7d56a6d098553" Name="Diagram1">
-        <EntityTypeShape EntityType="Adam_AsprovaModel.itZestawieniaPlum" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+      <Diagram DiagramId="bfb53ac356e149ac9199e21bb051d055" Name="Diagram1">
+        <EntityTypeShape EntityType="Adam_AsprovaModel.dev_plum_pracownicy" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Adam_AsprovaModel.plum_logowania" Width="1.5" PointX="2.375" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Adam_AsprovaModel.itZestawieniaPlum" Width="1.5" PointX="13" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Adam_AsprovaModel.plum_uzytkownicy" Width="3.125" PointX="6.125" PointY="2" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

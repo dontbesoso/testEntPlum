@@ -13,8 +13,10 @@ namespace testEntPlum
 {
     public partial class mainList : Form
     {
-        public mainList()
+        private static string loggedInUser = "";
+        public mainList(string user)
         {
+            loggedInUser = user;
             InitializeComponent();
             cmbGniazdo.SelectedIndex = 0;
         }
@@ -24,18 +26,25 @@ namespace testEntPlum
 
             string wybraneGniazdo = cmbGniazdo.SelectedItem.ToString();
             string wybranaData = cldDataLogowania.SelectionStart.ToString();
-            MessageBox.Show(wybraneGniazdo + " : " + wybranaData);
 
-            
+
             using (var context = new Adam_AsprovaEntities())
             {
                 DateTime myDate = DateTime.Parse(wybranaData);
                 context.it_ZasilPlumDzien(myDate);
 
-                var std = context.itZestawieniaPlums.OrderBy(k => k.timeIn).ToList();
+                var std = context.itZestawieniaPlums
+                        .Where(k => k.machineName.Contains(wybraneGniazdo.Substring(1, 3)))
+                        .OrderBy(k => k.timeIn).ToList();
                 grdLogowania.DataSource = std;
             }
             
+        }
+
+        private void zmieńHasłoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmZmianaHasla oknoHasla = new frmZmianaHasla(loggedInUser);
+                oknoHasla.Show();
         }
     }
 }

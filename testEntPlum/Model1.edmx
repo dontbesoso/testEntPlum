@@ -4,7 +4,19 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Adam_AsprovaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Adam_AsprovaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="dev_plum_pracownicy">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="cardId" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="description" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="hasAdmin" Type="bit" Nullable="false" />
+          <Property Name="password" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="passdate" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'Adam_Asprova.dbo.itZestawieniaPlum' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="itZestawieniaPlum">
@@ -21,10 +33,39 @@ warning 6002: The table/view 'Adam_Asprova.dbo.itZestawieniaPlum' does not have 
           <Property Name="ileMinut" Type="int" />
           <Property Name="bilans" Type="int" />
         </EntityType>
+        <EntityType Name="plum_logowania">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userid" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="userName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="timeIn" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="type" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="prevId" Type="int" Nullable="false" />
+          <Property Name="sessionId" Type="int" Nullable="false" />
+          <Property Name="machineName" Type="nvarchar" MaxLength="64" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Adam_Asprova.dbo.plum_uzytkownicy' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="plum_uzytkownicy">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="username" />
+            <PropertyRef Name="password" />
+            <PropertyRef Name="passdate" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="username" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="password" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="passdate" Type="date" Nullable="false" />
+        </EntityType>
         <Function Name="it_ZasilPlumDzien" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="czas" Type="datetime" Mode="In" />
         </Function>
         <EntityContainer Name="Adam_AsprovaModelStoreContainer">
+          <EntitySet Name="dev_plum_pracownicy" EntityType="Self.dev_plum_pracownicy" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="plum_logowania" EntityType="Self.plum_logowania" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="itZestawieniaPlum" EntityType="Self.itZestawieniaPlum" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [itZestawieniaPlum].[id] AS [id], 
@@ -38,12 +79,44 @@ warning 6002: The table/view 'Adam_Asprova.dbo.itZestawieniaPlum' does not have 
     [itZestawieniaPlum].[bilans] AS [bilans]
     FROM [dbo].[itZestawieniaPlum] AS [itZestawieniaPlum]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="plum_uzytkownicy" EntityType="Self.plum_uzytkownicy" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [plum_uzytkownicy].[id] AS [id], 
+    [plum_uzytkownicy].[username] AS [username], 
+    [plum_uzytkownicy].[password] AS [password], 
+    [plum_uzytkownicy].[passdate] AS [passdate]
+    FROM [dbo].[plum_uzytkownicy] AS [plum_uzytkownicy]</DefiningQuery>
+          </EntitySet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Adam_AsprovaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="dev_plum_pracownicy">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="cardId" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="hasAdmin" Type="Boolean" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="passdate" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="plum_logowania">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userid" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="userName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="timeIn" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="prevId" Type="Int32" Nullable="false" />
+          <Property Name="sessionId" Type="Int32" Nullable="false" />
+          <Property Name="machineName" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
         <EntityType Name="itZestawieniaPlum">
           <Key>
             <PropertyRef Name="id" />
@@ -59,17 +132,59 @@ warning 6002: The table/view 'Adam_Asprova.dbo.itZestawieniaPlum' does not have 
           <Property Name="bilans" Type="Int32" />
         </EntityType>
         <EntityContainer Name="Adam_AsprovaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="dev_plum_pracownicy" EntityType="Self.dev_plum_pracownicy" />
+          <EntitySet Name="plum_logowania" EntityType="Self.plum_logowania" />
           <EntitySet Name="itZestawieniaPlums" EntityType="Self.itZestawieniaPlum" />
           <FunctionImport Name="it_ZasilPlumDzien">
-            <Parameter Name="czas" Mode="In" Type="DateTime" />
+          <Parameter Name="czas" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <EntitySet Name="plum_uzytkownicy" EntityType="Adam_AsprovaModel.plum_uzytkownicy" />
         </EntityContainer>
+        <EntityType Name="plum_uzytkownicy">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="username" />
+            <PropertyRef Name="password" />
+            <PropertyRef Name="passdate" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="username" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="password" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="passdate" Type="DateTime" Nullable="false" Precision="0" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="Adam_AsprovaModelStoreContainer" CdmEntityContainer="Adam_AsprovaEntities">
+          <EntitySetMapping Name="dev_plum_pracownicy">
+            <EntityTypeMapping TypeName="Adam_AsprovaModel.dev_plum_pracownicy">
+              <MappingFragment StoreEntitySet="dev_plum_pracownicy">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="cardId" ColumnName="cardId" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="hasAdmin" ColumnName="hasAdmin" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="passdate" ColumnName="passdate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="plum_logowania">
+            <EntityTypeMapping TypeName="Adam_AsprovaModel.plum_logowania">
+              <MappingFragment StoreEntitySet="plum_logowania">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="userid" ColumnName="userid" />
+                <ScalarProperty Name="userName" ColumnName="userName" />
+                <ScalarProperty Name="timeIn" ColumnName="timeIn" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="prevId" ColumnName="prevId" />
+                <ScalarProperty Name="sessionId" ColumnName="sessionId" />
+                <ScalarProperty Name="machineName" ColumnName="machineName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="itZestawieniaPlums">
             <EntityTypeMapping TypeName="Adam_AsprovaModel.itZestawieniaPlum">
               <MappingFragment StoreEntitySet="itZestawieniaPlum">
@@ -86,6 +201,16 @@ warning 6002: The table/view 'Adam_Asprova.dbo.itZestawieniaPlum' does not have 
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="it_ZasilPlumDzien" FunctionName="Adam_AsprovaModel.Store.it_ZasilPlumDzien" />
+          <EntitySetMapping Name="plum_uzytkownicy">
+            <EntityTypeMapping TypeName="Adam_AsprovaModel.plum_uzytkownicy">
+              <MappingFragment StoreEntitySet="plum_uzytkownicy">
+                <ScalarProperty Name="passdate" ColumnName="passdate" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

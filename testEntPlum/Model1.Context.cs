@@ -27,7 +27,10 @@ namespace testEntPlum
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<dev_plum_pracownicy> dev_plum_pracownicy { get; set; }
+        public virtual DbSet<plum_logowania> plum_logowania { get; set; }
         public virtual DbSet<itZestawieniaPlum> itZestawieniaPlums { get; set; }
+        public virtual DbSet<plum_uzytkownicy> plum_uzytkownicy { get; set; }
     
         public virtual int it_ZasilPlumDzien(Nullable<System.DateTime> czas)
         {

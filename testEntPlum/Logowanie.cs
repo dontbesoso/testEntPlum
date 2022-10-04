@@ -17,37 +17,65 @@ namespace testEntPlum
             InitializeComponent();
         }
 
+        
+
         private void label1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        public static string MD5(string input)
+        {
+            // Use input string to calculate MD5 hash
+            using (System.Security.Cryptography.MD5 md5 = System.Security.Cryptography.MD5.Create())
+            {
+                byte[] inputBytes = System.Text.Encoding.ASCII.GetBytes(input);
+                byte[] hashBytes = md5.ComputeHash(inputBytes);
+
+                //return Convert.ToHexString(hashBytes); // .NET 5 +
+
+                // Convert the byte array to hexadecimal string prior to .NET 5
+                 StringBuilder sb = new System.Text.StringBuilder();
+                 for (int i = 0; i < hashBytes.Length; i++)
+                 {
+                     sb.Append(hashBytes[i].ToString("X2"));
+                 }
+                 return sb.ToString();
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             string password, username;
 
-            string sysUser = "ADAM";
-            string sysPass = "TEST";
-
             username = txtLogin.Text.ToString().ToUpper().Trim();
-            password = txtPass.Text.ToString().ToUpper().Trim();
-
-
-            if ((username == sysUser.ToUpper().Trim()) && (password == sysPass.ToUpper().Trim()))
-            {
-                MessageBox.Show("Sukces");
-                mainList listaLogowan = new mainList();
-                listaLogowan.Show();
-                txtLogin.Text = "";
-                txtPass.Text = "";
-            }
-            else
-            {
-                MessageBox.Show("Nieprawidłowy login lub hasło.");
-                txtLogin.Text = "";
-                txtPass.Text = "";
-            }
+            password = txtPass.Text.ToString().Trim();
             
+            using (var context = new Adam_AsprovaEntities())
+            {
+
+                var std = context.plum_uzytkownicy
+                    .FirstOrDefault((a => a.username == username));
+                    if (std != null)
+                        if (std.password.ToString().ToUpper() == MD5(password).ToUpper())
+                        {
+                        // if data starsza niż ... else okno
+                            
+                            mainList oknoProgramu = new mainList(username);
+                            oknoProgramu.Show();
+                            txtLogin.Text = "";
+                            txtPass.Text = "";
+                        } else {
+                            MessageBox.Show("Nieprawidłowy login lub hasło");
+                        }
+                    else {
+                        MessageBox.Show("Nieprawidłowy login lub hasło");
+                    }
+                
+            }
+
+     
+
 
         }
     }
