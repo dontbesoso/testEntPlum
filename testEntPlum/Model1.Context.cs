@@ -15,10 +15,10 @@ namespace testEntPlum
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class Adam_AsprovaEntities : DbContext
+    public partial class Adam_AsprovaEntities1 : DbContext
     {
-        public Adam_AsprovaEntities()
-            : base("name=Adam_AsprovaEntities")
+        public Adam_AsprovaEntities1()
+            : base("name=Adam_AsprovaEntities1")
         {
         }
     
@@ -27,10 +27,19 @@ namespace testEntPlum
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<dev_plum_pracownicy> dev_plum_pracownicy { get; set; }
         public virtual DbSet<plum_logowania> plum_logowania { get; set; }
         public virtual DbSet<itZestawieniaPlum> itZestawieniaPlums { get; set; }
-        public virtual DbSet<plum_uzytkownicy> plum_uzytkownicy { get; set; }
+        public virtual DbSet<plum_pracownicy> plum_pracownicy { get; set; }
+        public virtual DbSet<plum_uzytkownicy> plum_uzytkownicy_ { get; set; }
+    
+        public virtual int podajLogowaniaDnia(string dataShort)
+        {
+            var dataShortParameter = dataShort != null ?
+                new ObjectParameter("dataShort", dataShort) :
+                new ObjectParameter("dataShort", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("podajLogowaniaDnia", dataShortParameter);
+        }
     
         public virtual int it_ZasilPlumDzien(Nullable<System.DateTime> czas)
         {

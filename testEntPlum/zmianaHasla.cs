@@ -12,8 +12,8 @@ namespace testEntPlum
 {
     public partial class frmZmianaHasla : Form
     {
-        private static string tmpUser = "";
-        public frmZmianaHasla(string user)
+        private static int tmpUser = -1;
+        public frmZmianaHasla(int user)
         {
             tmpUser = user;
             InitializeComponent();
@@ -29,8 +29,8 @@ namespace testEntPlum
         {
             string tmpNewPass = "", tmpConfirmNewPass = "";
 
-            tmpNewPass = txtNewPass.Text.ToString().ToUpper();
-            tmpConfirmNewPass = txtConfirmNewPass.Text.ToString().ToUpper();
+            tmpNewPass = txtNewPass.Text.ToString();
+            tmpConfirmNewPass = txtConfirmNewPass.Text.ToString();
 
             if (tmpNewPass.Length > 0)
             {
@@ -48,6 +48,27 @@ namespace testEntPlum
                     else
                     {
                         // właściwa zmiana hasła
+                        using (var context = new Adam_AsprovaEntities1())
+                        {
+
+
+                            var std = context.plum_uzytkownicy_.First(p => p.id == tmpUser);
+                            if (std != null)
+                            {
+                                try
+                                {
+                                    DateTime newPassDate = DateTime.Now;
+                                    std.passdate = DateTime.Parse(newPassDate.ToShortDateString());
+                                    std.password = Logowanie.SHA256(tmpNewPass);
+                                    MessageBox.Show("Hasło użytkownika zostało zmienione.");
+                                    context.SaveChanges();
+                                    Close();
+                                } catch(Exception ex)
+                                {
+                                    MessageBox.Show(ex.Message);
+                                }
+                            }
+                        }
                     }
                 }
             }

@@ -24,6 +24,18 @@ namespace testEntPlum
 
         }
 
+        public static string SHA256(string randomString)
+        {
+            var crypt = new System.Security.Cryptography.SHA256Managed();
+            var hash = new System.Text.StringBuilder();
+            byte[] crypto = crypt.ComputeHash(Encoding.UTF8.GetBytes(randomString));
+            foreach (byte theByte in crypto)
+            {
+                hash.Append(theByte.ToString("x2"));
+            }
+            return hash.ToString();
+        }
+
         public static string MD5(string input)
         {
             // Use input string to calculate MD5 hash
@@ -32,9 +44,6 @@ namespace testEntPlum
                 byte[] inputBytes = System.Text.Encoding.ASCII.GetBytes(input);
                 byte[] hashBytes = md5.ComputeHash(inputBytes);
 
-                //return Convert.ToHexString(hashBytes); // .NET 5 +
-
-                // Convert the byte array to hexadecimal string prior to .NET 5
                  StringBuilder sb = new System.Text.StringBuilder();
                  for (int i = 0; i < hashBytes.Length; i++)
                  {
@@ -49,24 +58,33 @@ namespace testEntPlum
             string password, username;
 
             username = txtLogin.Text.ToString().ToUpper().Trim();
-            password = txtPass.Text.ToString().Trim();
+            password = SHA256(txtPass.Text.ToString().Trim());
             
-            using (var context = new Adam_AsprovaEntities())
+            using (var context = new Adam_AsprovaEntities1())
             {
 
-                var std = context.plum_uzytkownicy
+                var std = context.plum_uzytkownicy_
                     .FirstOrDefault((a => a.username == username));
                     if (std != null)
-                        if (std.password.ToString().ToUpper() == MD5(password).ToUpper())
+                        if (std.password.ToString() == password.ToUpper())
                         {
-                        // if data starsza niż ... else okno
-                            
-                            mainList oknoProgramu = new mainList(username);
+                            DateTime czasLogowania = DateTime.Now;
+                            DateTime czasHasla =(DateTime)std.passdate;
+
+                            int timePeriod = (int)(czasLogowania - czasHasla).TotalDays;
+                            if (timePeriod > 30) {
+                                frmZmianaHasla newPassForm = new frmZmianaHasla(std.id);
+                            newPassForm.Show();
+                            }
+                            else {
+                            mainList oknoProgramu = new mainList(std.id);
                             oknoProgramu.Show();
                             txtLogin.Text = "";
                             txtPass.Text = "";
+                            }
                         } else {
-                            MessageBox.Show("Nieprawidłowy login lub hasło");
+                            
+                            MessageBox.Show("Nieprawidłowy login lub hasło"  );
                         }
                     else {
                         MessageBox.Show("Nieprawidłowy login lub hasło");
@@ -76,6 +94,11 @@ namespace testEntPlum
 
      
 
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
 
         }
     }

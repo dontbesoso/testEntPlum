@@ -12,14 +12,12 @@ namespace testEntPlum
     using System;
     using System.Collections.Generic;
     
-    public partial class dev_plum_pracownicy
+    public partial class plum_pracownicy
     {
         public int id { get; set; }
         public string name { get; set; }
         public string cardId { get; set; }
         public string description { get; set; }
-        public bool hasAdmin { get; set; }
-        public string password { get; set; }
-        public string passdate { get; set; }
+        public string hasAdmin { get; set; }
     }
 }

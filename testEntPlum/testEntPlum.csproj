@@ -57,29 +57,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="dev_plum_pracownicy.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="zmianaHasla.cs">
+    <Compile Include="employeeList.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="zmianaHasla.Designer.cs">
-      <DependentUpon>zmianaHasla.cs</DependentUpon>
+    <Compile Include="employeeList.Designer.cs">
+      <DependentUpon>employeeList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmAddEditEmployee.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAddEditEmployee.Designer.cs">
+      <DependentUpon>frmAddEditEmployee.cs</DependentUpon>
     </Compile>
     <Compile Include="itZestawieniaPlum.cs">
       <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="mainList.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="mainList.Designer.cs">
-      <DependentUpon>mainList.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Logowanie.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Logowanie.Designer.cs">
-      <DependentUpon>Logowanie.cs</DependentUpon>
     </Compile>
     <Compile Include="Model1.Context.cs">
       <AutoGen>True</AutoGen>
@@ -99,11 +90,38 @@
     <Compile Include="plum_logowania.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="plum_pracownicy.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="plum_uzytkownicy.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="zmianaHasla.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="zmianaHasla.Designer.cs">
+      <DependentUpon>zmianaHasla.cs</DependentUpon>
+    </Compile>
+    <Compile Include="mainList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="mainList.Designer.cs">
+      <DependentUpon>mainList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Logowanie.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Logowanie.Designer.cs">
+      <DependentUpon>Logowanie.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="employeeList.resx">
+      <DependentUpon>employeeList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAddEditEmployee.resx">
+      <DependentUpon>frmAddEditEmployee.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="zmianaHasla.resx">
       <DependentUpon>zmianaHasla.cs</DependentUpon>
     </EmbeddedResource>

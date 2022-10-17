@@ -13,8 +13,8 @@ namespace testEntPlum
 {
     public partial class mainList : Form
     {
-        private static string loggedInUser = "";
-        public mainList(string user)
+        private static int loggedInUser = -1;
+        public mainList(int user)
         {
             loggedInUser = user;
             InitializeComponent();
@@ -28,13 +28,13 @@ namespace testEntPlum
             string wybranaData = cldDataLogowania.SelectionStart.ToString();
 
 
-            using (var context = new Adam_AsprovaEntities())
+            using (var context = new Adam_AsprovaEntities1())
             {
                 DateTime myDate = DateTime.Parse(wybranaData);
                 context.it_ZasilPlumDzien(myDate);
 
                 var std = context.itZestawieniaPlums
-                        .Where(k => k.machineName.Contains(wybraneGniazdo.Substring(1, 3)))
+                        .Where(k => k.machineName.Contains(wybraneGniazdo.Substring(1, 2)))
                         .OrderBy(k => k.timeIn).ToList();
                 grdLogowania.DataSource = std;
             }
@@ -45,6 +45,12 @@ namespace testEntPlum
         {
             frmZmianaHasla oknoHasla = new frmZmianaHasla(loggedInUser);
                 oknoHasla.Show();
+        }
+
+        private void pracownicyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            employeeList listaPracownikow = new employeeList();
+                listaPracownikow.Show();
         }
     }
 }

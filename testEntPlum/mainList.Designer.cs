@@ -36,6 +36,7 @@ namespace testEntPlum
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.programToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.zmieńHasłoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pracownicyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.grdLogowania)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -75,7 +76,9 @@ namespace testEntPlum
             this.cmbGniazdo.FormattingEnabled = true;
             this.cmbGniazdo.Items.AddRange(new object[] {
             "Szlifiernia/Spawalnia",
-            "Montaż"});
+            "Montaż",
+            "Obróbka",
+            "Zaginanie"});
             this.cmbGniazdo.Location = new System.Drawing.Point(513, 201);
             this.cmbGniazdo.Name = "cmbGniazdo";
             this.cmbGniazdo.Size = new System.Drawing.Size(188, 21);
@@ -94,7 +97,8 @@ namespace testEntPlum
             // programToolStripMenuItem
             // 
             this.programToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.zmieńHasłoToolStripMenuItem});
+            this.zmieńHasłoToolStripMenuItem,
+            this.pracownicyToolStripMenuItem});
             this.programToolStripMenuItem.Name = "programToolStripMenuItem";
             this.programToolStripMenuItem.Size = new System.Drawing.Size(65, 20);
             this.programToolStripMenuItem.Text = "Program";
@@ -105,6 +109,13 @@ namespace testEntPlum
             this.zmieńHasłoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.zmieńHasłoToolStripMenuItem.Text = "Zmień hasło";
             this.zmieńHasłoToolStripMenuItem.Click += new System.EventHandler(this.zmieńHasłoToolStripMenuItem_Click);
+            // 
+            // pracownicyToolStripMenuItem
+            // 
+            this.pracownicyToolStripMenuItem.Name = "pracownicyToolStripMenuItem";
+            this.pracownicyToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.pracownicyToolStripMenuItem.Text = "Pracownicy";
+            this.pracownicyToolStripMenuItem.Click += new System.EventHandler(this.pracownicyToolStripMenuItem_Click);
             // 
             // mainList
             // 
@@ -138,5 +149,6 @@ namespace testEntPlum
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem programToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem zmieńHasłoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem pracownicyToolStripMenuItem;
     }
 }

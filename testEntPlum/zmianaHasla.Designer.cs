@@ -85,11 +85,11 @@ namespace testEntPlum
             // lblConfirmNewPass
             // 
             this.lblConfirmNewPass.AutoSize = true;
-            this.lblConfirmNewPass.Location = new System.Drawing.Point(114, 45);
+            this.lblConfirmNewPass.Location = new System.Drawing.Point(77, 45);
             this.lblConfirmNewPass.Name = "lblConfirmNewPass";
-            this.lblConfirmNewPass.Size = new System.Drawing.Size(35, 13);
+            this.lblConfirmNewPass.Size = new System.Drawing.Size(75, 13);
             this.lblConfirmNewPass.TabIndex = 7;
-            this.lblConfirmNewPass.Text = "label1";
+            this.lblConfirmNewPass.Text = "Powtórz hasło";
             // 
             // frmZmianaHasla
             // 
