@@ -7,7 +7,7 @@
       <Diagram DiagramId="acbd8f7c8ac2455b861a5dbddace13f4" Name="Diagram1">
         <EntityTypeShape EntityType="Adam_AsprovaModel.plum_logowania" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Adam_AsprovaModel.itZestawieniaPlum" Width="1.5" PointX="2.75" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Adam_AsprovaModel.plum_pracownicy" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Adam_AsprovaModel.plum_pracownicy" Width="1.5" PointX="5.75" PointY="1.875" IsExpanded="true" />
         <EntityTypeShape EntityType="Adam_AsprovaModel.plum_uzytkownicy" Width="1.5" PointX="8.625" PointY="2.125" />
       </Diagram>
     </edmx:Diagrams>

@@ -55,6 +55,7 @@ namespace testEntPlum
             this.btnAddSave.TabIndex = 1;
             this.btnAddSave.Text = "Zapisz zmiany";
             this.btnAddSave.UseVisualStyleBackColor = true;
+            this.btnAddSave.Click += new System.EventHandler(this.btnAddSave_Click);
             // 
             // lblNumerKarty
             // 

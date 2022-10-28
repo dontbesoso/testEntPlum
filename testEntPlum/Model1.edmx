@@ -39,7 +39,6 @@ warning 6002: The table/view 'Adam_Asprova.dbo.plum_pracownicy' does not have a 
         <EntityType Name="plum_pracownicy">
           <Key>
             <PropertyRef Name="id" />
-            <PropertyRef Name="hasAdmin" />
           </Key>
           <Property Name="id" Type="int" Nullable="false" />
           <Property Name="name" Type="nvarchar" MaxLength="64" />
@@ -126,7 +125,6 @@ warning 6002: The table/view 'Adam_Asprova.dbo.plum_uzytkownicy_' does not have 
         <EntityType Name="plum_pracownicy">
           <Key>
             <PropertyRef Name="id" />
-            <PropertyRef Name="hasAdmin" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" />
           <Property Name="name" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />

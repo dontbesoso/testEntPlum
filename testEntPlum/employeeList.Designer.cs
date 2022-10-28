@@ -90,6 +90,7 @@ namespace testEntPlum
             this.btnZamknij.TabIndex = 4;
             this.btnZamknij.Text = "Zamknij";
             this.btnZamknij.UseVisualStyleBackColor = true;
+            this.btnZamknij.Click += new System.EventHandler(this.btnZamknij_Click);
             // 
             // employeeList
             // 
