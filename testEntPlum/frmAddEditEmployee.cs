@@ -16,7 +16,6 @@ namespace testEntPlum
         public frmAddEditEmployee(int idPracownika = 0)
         {
             InitializeComponent();
-            MessageBox.Show(idPracownika.ToString());
             if (idPracownika != 0)
             {
                 currentEmployee = idPracownika;
@@ -33,24 +32,36 @@ namespace testEntPlum
 
         private void btnAddSave_Click(object sender, EventArgs e)
         {
-            // if () waliduj poprawność numeru karty
             string cardNumber = this.txtCardNumber.ToString();
             string employeeName = this.txtEmployeeName.ToString();
             if (currentEmployee != 0)
             {
                 using (var context = new Adam_AsprovaEntities1())
                 {
+
                     var pracownik = context.plum_pracownicy.First(k => k.id == currentEmployee);
 
                     pracownik.cardId = this.txtCardNumber.Text.Trim();
                     pracownik.name = this.txtEmployeeName.Text.Trim();
                     context.SaveChanges();
                 }
-            } else
-            {
-                // add
             }
+            else
+            {
+                var tmpPracownik = new plum_pracownicy { cardId = this.txtCardNumber.Text.Trim(), name = this.txtEmployeeName.Text.Trim(), description = "", hasAdmin = "false" };
+                using (var context = new Adam_AsprovaEntities1())
+                {
+                    context.plum_pracownicy.Add(tmpPracownik);
+                    context.SaveChanges();
+                }
+            }
+            Close();
 
+        }
+
+        private void btnZamknij_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

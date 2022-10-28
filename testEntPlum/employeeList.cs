@@ -15,12 +15,22 @@ namespace testEntPlum
         public employeeList()
         {
             InitializeComponent();
+            updateGridCaption();
+        }
+
+        private void FormClosed(object sender, FormClosedEventArgs e)
+        {
+            updateGridCaption();
+        }
+
+        private void updateGridCaption()
+        {
 
             using (var context = new Adam_AsprovaEntities1())
             {
                 var std = context.plum_pracownicy
                         .Select(p => new { p.id, p.name, p.cardId })
-                        .OrderBy(p => p.cardId).ToList();
+                        .OrderBy(p => p.name).ToList();
                 grdEmployee.DataSource = std;
             }
         }
@@ -29,16 +39,18 @@ namespace testEntPlum
         {
             int rowindex = grdEmployee.CurrentRow.Index;
             DataGridViewRow selectedRow = grdEmployee.Rows[rowindex];
-            //MessageBox.Show(Convert.ToString(selectedRow.Cells["id"].Value));
             
             frmAddEditEmployee oknoPracownika = new frmAddEditEmployee(Convert.ToInt32(selectedRow.Cells["id"].Value));
+            oknoPracownika.FormClosed += FormClosed;
                 oknoPracownika.Show();
+            
         }
 
         private void btnDodaj_Click(object sender, EventArgs e)
         {
             frmAddEditEmployee oknoPracownika = new frmAddEditEmployee();
-                oknoPracownika.Show();
+            oknoPracownika.FormClosed += FormClosed;
+            oknoPracownika.Show();
         }
 
         private void btnUsun_Click(object sender, EventArgs e)
@@ -49,28 +61,24 @@ namespace testEntPlum
                 int rowindex = grdEmployee.CurrentRow.Index;
                 DataGridViewRow selectedRow = grdEmployee.Rows[rowindex];
                 int delIndex = Convert.ToInt32(selectedRow.Cells["id"].Value);
-                //magia entity
-                MessageBox.Show(delIndex.ToString());
+
                 using (var context = new Adam_AsprovaEntities1())
                 {
                     var pracownik = context.plum_pracownicy.First(k => k.id == delIndex);
 
                     context.SaveChanges();
 
-                    //var std = context.plum_pracownicy
-                    //        .Select(p => new { p.id, p.name, p.cardId })
-                    //        .OrderBy(p => p.cardId).ToList();
 
                 }
 
             }
+            updateGridCaption();
            
         }
 
         private void btnZamknij_Click(object sender, EventArgs e)
         {
             Close();
-
         }
     }
 }

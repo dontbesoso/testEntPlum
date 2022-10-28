@@ -46,6 +46,7 @@ namespace testEntPlum
             this.btnZamknij.TabIndex = 0;
             this.btnZamknij.Text = "Zamknij";
             this.btnZamknij.UseVisualStyleBackColor = true;
+            this.btnZamknij.Click += new System.EventHandler(this.btnZamknij_Click);
             // 
             // btnAddSave
             // 
