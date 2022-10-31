@@ -41,14 +41,14 @@ namespace testEntPlum
 
                 if (!valCardNumber(this.txtCardNumber.Text.Trim()))
                 {
-                    MessageBox.Show("Nieprawidłowy numer karty. Numer karty to ...");
+                    MessageBox.Show("Nieprawidłowy numer karty. Numer karty to 10 znakowa liczba zapisana na karcie.");
                 } else
                 {
                     using (var context = new Adam_AsprovaEntities1())
                     {
 
                         var pracownik = context.plum_pracownicy.First(k => k.id == currentEmployee);
-
+                        // if context > 1 ?
                         pracownik.cardId = this.txtCardNumber.Text.Trim();
                         pracownik.name = this.txtEmployeeName.Text.Trim();
                         context.SaveChanges();
@@ -61,10 +61,11 @@ namespace testEntPlum
             {
                 if (!valCardNumber(this.txtCardNumber.Text.Trim()))
                 {
-                    MessageBox.Show("Nieprawidłowy numer karty. Numer karty to ...");
+                    MessageBox.Show("Nieprawidłowy numer karty. Numer karty to 10 znakowa liczba zapisana na karcie.");
                 }
                 else
                 {
+                    // try context, if 0 -> else ->
                     var tmpPracownik = new plum_pracownicy { cardId = this.txtCardNumber.Text.Trim(), name = this.txtEmployeeName.Text.Trim(), description = "", hasAdmin = "false" };
                     using (var context = new Adam_AsprovaEntities1())
                     {
