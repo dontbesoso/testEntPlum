@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -36,27 +37,60 @@ namespace testEntPlum
             string employeeName = this.txtEmployeeName.ToString();
             if (currentEmployee != 0)
             {
-                using (var context = new Adam_AsprovaEntities1())
+                MessageBox.Show(this.txtCardNumber.Text.Length.ToString());
+
+                if (!valCardNumber(this.txtCardNumber.Text.Trim()))
                 {
+                    MessageBox.Show("Nieprawidłowy numer karty. Numer karty to ...");
+                } else
+                {
+                    using (var context = new Adam_AsprovaEntities1())
+                    {
 
-                    var pracownik = context.plum_pracownicy.First(k => k.id == currentEmployee);
+                        var pracownik = context.plum_pracownicy.First(k => k.id == currentEmployee);
 
-                    pracownik.cardId = this.txtCardNumber.Text.Trim();
-                    pracownik.name = this.txtEmployeeName.Text.Trim();
-                    context.SaveChanges();
+                        pracownik.cardId = this.txtCardNumber.Text.Trim();
+                        pracownik.name = this.txtEmployeeName.Text.Trim();
+                        context.SaveChanges();
+                    }
+                    Close();
                 }
+                
             }
             else
             {
-                var tmpPracownik = new plum_pracownicy { cardId = this.txtCardNumber.Text.Trim(), name = this.txtEmployeeName.Text.Trim(), description = "", hasAdmin = "false" };
-                using (var context = new Adam_AsprovaEntities1())
+                if (!valCardNumber(this.txtCardNumber.Text.Trim()))
                 {
-                    context.plum_pracownicy.Add(tmpPracownik);
-                    context.SaveChanges();
+                    MessageBox.Show("Nieprawidłowy numer karty. Numer karty to ...");
+                }
+                else
+                {
+                    var tmpPracownik = new plum_pracownicy { cardId = this.txtCardNumber.Text.Trim(), name = this.txtEmployeeName.Text.Trim(), description = "", hasAdmin = "false" };
+                    using (var context = new Adam_AsprovaEntities1())
+                    {
+                        context.plum_pracownicy.Add(tmpPracownik);
+                        context.SaveChanges();
+
+                    }
+                    Close();
                 }
             }
-            Close();
+            
 
+        }
+
+        private bool valCardNumber(string cardId)
+        {
+            Regex pattern = new Regex(@"(?<!\d)\d{10}(?!\d)");
+
+            if (pattern.IsMatch(cardId))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         private void btnZamknij_Click(object sender, EventArgs e)

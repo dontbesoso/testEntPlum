@@ -32,6 +32,12 @@ namespace testEntPlum
                         .Select(p => new { p.id, p.name, p.cardId })
                         .OrderBy(p => p.name).ToList();
                 grdEmployee.DataSource = std;
+
+            }
+
+            foreach (DataGridViewColumn column in grdEmployee.Columns)
+            {
+                column.SortMode = DataGridViewColumnSortMode.Automatic;
             }
         }
 
@@ -65,7 +71,7 @@ namespace testEntPlum
                 using (var context = new Adam_AsprovaEntities1())
                 {
                     var pracownik = context.plum_pracownicy.First(k => k.id == delIndex);
-
+                    context.plum_pracownicy.Remove(pracownik);
                     context.SaveChanges();
 
 

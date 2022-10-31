@@ -43,7 +43,9 @@ namespace testEntPlum
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.grdEmployee.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.grdEmployee.GridColor = System.Drawing.SystemColors.ControlLight;
             this.grdEmployee.Location = new System.Drawing.Point(12, 12);
+            this.grdEmployee.MultiSelect = false;
             this.grdEmployee.Name = "grdEmployee";
             this.grdEmployee.Size = new System.Drawing.Size(695, 426);
             this.grdEmployee.TabIndex = 0;

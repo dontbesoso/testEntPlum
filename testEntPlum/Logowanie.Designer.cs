@@ -88,9 +88,9 @@ namespace testEntPlum
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(6, 175);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(64, 13);
+            this.label4.Size = new System.Drawing.Size(70, 13);
             this.label4.TabIndex = 6;
-            this.label4.Text = "wersja: 0.06";
+            this.label4.Text = "wersja: 0.065";
             // 
             // Logowanie
             // 
