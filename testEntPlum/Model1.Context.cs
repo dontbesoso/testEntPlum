@@ -29,8 +29,8 @@ namespace testEntPlum
     
         public virtual DbSet<plum_logowania> plum_logowania { get; set; }
         public virtual DbSet<itZestawieniaPlum> itZestawieniaPlums { get; set; }
-        public virtual DbSet<plum_uzytkownicy> plum_uzytkownicy_ { get; set; }
         public virtual DbSet<plum_pracownicy> plum_pracownicy { get; set; }
+        public virtual DbSet<plum_uzytkownicy> plum_uzytkownicy { get; set; }
     
         public virtual int podajLogowaniaDnia(string dataShort)
         {

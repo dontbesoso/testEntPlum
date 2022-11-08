@@ -52,15 +52,15 @@ namespace testEntPlum
                         {
 
 
-                            var std = context.plum_uzytkownicy_.First(p => p.id == tmpUser);
+                            var std = context.plum_uzytkownicy.First(p => p.id == tmpUser);
                             if (std != null)
                             {
                                 try
                                 {
                                     DateTime newPassDate = DateTime.Now;
                                     std.passdate = DateTime.Parse(newPassDate.ToShortDateString());
-                                    std.password = Logowanie.SHA256(tmpNewPass);
-                                    MessageBox.Show("Hasło użytkownika zostało zmienione.");
+                                    std.password = Logowanie.SHA256(tmpNewPass).ToUpper();
+                                    //MessageBox.Show("Hasło użytkownika zostało zmienione." + " data: " + std.passdate.ToString() + " hasło: " + std.password.ToString());
                                     context.SaveChanges();
                                     Close();
                                 } catch(Exception ex)

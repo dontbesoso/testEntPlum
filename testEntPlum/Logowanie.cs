@@ -63,7 +63,7 @@ namespace testEntPlum
             using (var context = new Adam_AsprovaEntities1())
             {
 
-                var std = context.plum_uzytkownicy_
+                var std = context.plum_uzytkownicy
                     .FirstOrDefault((a => a.username == username));
                     if (std != null)
                         if (std.password.ToString() == password.ToUpper())

@@ -96,6 +96,9 @@
     <Compile Include="plum_uzytkownicy.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="plum_uzytkownicy_.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="zmianaHasla.cs">
       <SubType>Form</SubType>
     </Compile>

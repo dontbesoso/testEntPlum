@@ -44,17 +44,17 @@ warning 6002: The table/view 'Adam_Asprova.dbo.itZestawieniaPlum' does not have 
           <Property Name="description" Type="nvarchar" MaxLength="255" />
           <Property Name="hasAdmin" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Adam_Asprova.dbo.plum_uzytkownicy_' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="plum_uzytkownicy_">
+        <EntityType Name="plum_uzytkownicy">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="username" Type="nvarchar(max)" />
-          <Property Name="password" Type="nvarchar" MaxLength="64" />
-          <Property Name="passdate" Type="date" />
+          <Property Name="username" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="password" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="passdate" Type="date" Nullable="false" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Adam_Asprova.dbo.plum_uzytkownicy_' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <Function Name="it_ZasilPlumDzien" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="czas" Type="datetime" Mode="In" />
         </Function>
@@ -64,6 +64,7 @@ warning 6002: The table/view 'Adam_Asprova.dbo.plum_uzytkownicy_' does not have 
         <EntityContainer Name="Adam_AsprovaModelStoreContainer">
           <EntitySet Name="plum_logowania" EntityType="Self.plum_logowania" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="plum_pracownicy" EntityType="Self.plum_pracownicy" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="plum_uzytkownicy" EntityType="Self.plum_uzytkownicy" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="itZestawieniaPlum" EntityType="Self.itZestawieniaPlum" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [itZestawieniaPlum].[id] AS [id], 
@@ -76,14 +77,6 @@ warning 6002: The table/view 'Adam_Asprova.dbo.plum_uzytkownicy_' does not have 
     [itZestawieniaPlum].[ileMinut] AS [ileMinut], 
     [itZestawieniaPlum].[bilans] AS [bilans]
     FROM [dbo].[itZestawieniaPlum] AS [itZestawieniaPlum]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="plum_uzytkownicy_" EntityType="Self.plum_uzytkownicy_" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [plum_uzytkownicy_].[id] AS [id], 
-    [plum_uzytkownicy_].[username] AS [username], 
-    [plum_uzytkownicy_].[password] AS [password], 
-    [plum_uzytkownicy_].[passdate] AS [passdate]
-    FROM [dbo].[plum_uzytkownicy_] AS [plum_uzytkownicy_]</DefiningQuery>
           </EntitySet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -126,18 +119,9 @@ warning 6002: The table/view 'Adam_Asprova.dbo.plum_uzytkownicy_' does not have 
           <FunctionImport Name="it_ZasilPlumDzien">
           <Parameter Name="czas" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <EntitySet Name="plum_uzytkownicy_" EntityType="Adam_AsprovaModel.plum_uzytkownicy" />
           <EntitySet Name="plum_pracownicy" EntityType="Adam_AsprovaModel.plum_pracownicy" />
+          <EntitySet Name="plum_uzytkownicy" EntityType="Adam_AsprovaModel.plum_uzytkownicy" />
         </EntityContainer>
-        <EntityType Name="plum_uzytkownicy">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="username" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="password" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
-          <Property Name="passdate" Type="DateTime" Precision="0" />
-        </EntityType>
         <EntityType Name="plum_pracownicy">
           <Key>
             <PropertyRef Name="id" />
@@ -147,6 +131,15 @@ warning 6002: The table/view 'Adam_Asprova.dbo.plum_uzytkownicy_' does not have 
           <Property Name="cardId" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="hasAdmin" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="plum_uzytkownicy">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="username" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="password" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="passdate" Type="DateTime" Nullable="false" Precision="0" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -185,16 +178,6 @@ warning 6002: The table/view 'Adam_Asprova.dbo.plum_uzytkownicy_' does not have 
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="podajLogowaniaDnia" FunctionName="Adam_AsprovaModel.Store.podajLogowaniaDnia" />
           <FunctionImportMapping FunctionImportName="it_ZasilPlumDzien" FunctionName="Adam_AsprovaModel.Store.it_ZasilPlumDzien" />
-          <EntitySetMapping Name="plum_uzytkownicy_">
-            <EntityTypeMapping TypeName="Adam_AsprovaModel.plum_uzytkownicy">
-              <MappingFragment StoreEntitySet="plum_uzytkownicy_">
-                <ScalarProperty Name="passdate" ColumnName="passdate" />
-                <ScalarProperty Name="password" ColumnName="password" />
-                <ScalarProperty Name="username" ColumnName="username" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="plum_pracownicy">
             <EntityTypeMapping TypeName="Adam_AsprovaModel.plum_pracownicy">
               <MappingFragment StoreEntitySet="plum_pracownicy">
@@ -202,6 +185,16 @@ warning 6002: The table/view 'Adam_Asprova.dbo.plum_uzytkownicy_' does not have 
                 <ScalarProperty Name="description" ColumnName="description" />
                 <ScalarProperty Name="cardId" ColumnName="cardId" />
                 <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="plum_uzytkownicy">
+            <EntityTypeMapping TypeName="Adam_AsprovaModel.plum_uzytkownicy">
+              <MappingFragment StoreEntitySet="plum_uzytkownicy">
+                <ScalarProperty Name="passdate" ColumnName="passdate" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="username" ColumnName="username" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
